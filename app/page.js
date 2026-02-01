@@ -1,8 +1,7 @@
 import Image from "next/image";
-function Button({text, color})
+function Button({text, textColor, bgColor, w, h})
 {
-  return (<button className={`mr-8 h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors md:w-[158px]`}>{text}</button>)
-  
+  return (<button className={`mr-8 h-${h} w-${w} rounded-full bg-${bgColor} px-5 text-${textColor} transition-colors md:w-[158px]`}>{text}</button>)
 }
 
 export default function Home() {
@@ -18,9 +17,12 @@ export default function Home() {
           priority
           
         /> 
+      
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            <Button text="Hello" color="red-500"></Button>
+            
+            {/*Red Hello Button*/}
+            <Button text="Sign In" textColor="white" bgColor="red-500" w="full" h="12"></Button>
             To review platforms view below.
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
