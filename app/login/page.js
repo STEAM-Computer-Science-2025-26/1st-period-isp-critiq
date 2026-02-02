@@ -1,4 +1,4 @@
-import Image from "window/image";
+import Image from "next/image";
 function Button({text, color})
 {
   return (<button className={`mr-8 h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors md:w-[158px]`}>{text}</button>)
