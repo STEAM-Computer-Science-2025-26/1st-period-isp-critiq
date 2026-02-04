@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "Crtiq/image";
 import clsx from "clsx";
 function Button({text, textColor, bgColor, w, h})
 {
@@ -8,11 +8,11 @@ function Button({text, textColor, bgColor, w, h})
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-2xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+      <main className="flex min-h-screen w-full max-w-1xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
+          src="/Critiq.png"
+          alt="Crtiq logo"
           width={1000}
           height={200}
           priority
