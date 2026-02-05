@@ -1,7 +1,9 @@
 import Image from "next/image";
-function Button({text, color})
+import clsx from "clsx";
+
+function Button({text, textColor, bgColor, w, h})
 {
-  return (<button className={`mr-8 h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors md:w-[158px]`}>{text}</button>)
+  return (<button className={clsx("mr-8", `h-${h}`, `w-${w}`, `rounded-full bg-${bgColor}`, `px-5`, `text-${textColor}`, "transition-colors md:w-[158px]")}>{text}</button>)
 }
 
 export default function Home() {
