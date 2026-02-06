@@ -1,7 +1,8 @@
 import Image from "next/image";
-function Button({text, color})
+import clsx from "clsx";
+function Button({text, textColor, bgColor, w, h})
 {
-  return (<button className={`mr-8 h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors md:w-[158px]`}>{text}</button>)
+  return (<button className={clsx(`mr-8 h-${h} w-${w} rounded-full bg-${bgColor} px-5 text-${textColor} transition-colors md:w-[158px]`)}>{text}</button>)
 }
 
 export default function Home() {
@@ -34,7 +35,7 @@ export default function Home() {
             </button>
           </form>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+        <div className="m-8 flex flex-col gap-4 text-base font-medium sm:flex-row justify-center">
           <a
             className="flex h-12 w-full items-center justify-center rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
             href="#"
@@ -42,7 +43,7 @@ export default function Home() {
             Sign Up
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            className="flex h-12 w-full items-center justify-center whitespace-nonwrap rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
             href="#"
           >
             Forgot Password?
