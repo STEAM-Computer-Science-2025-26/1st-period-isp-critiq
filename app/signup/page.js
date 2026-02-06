@@ -12,7 +12,7 @@ export default function Home() {
 
         <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Log In
+            Sign Up
           </h1>
           <form className="flex flex-col gap-4 w-full max-w-md">
             <input
@@ -31,16 +31,16 @@ export default function Home() {
               type="submit"
               className="h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors hover:bg-red-600"
             >
-              Log In
+              Sign Up
             </button>
           </form>
         </div>
         <div className="m-8 flex flex-col gap-4 text-base font-medium sm:flex-row justify-center">
           <a
             className="flex h-12 w-full items-center justify-center rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev/signup"
+            href="https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev/login"
           >
-            Sign Up
+            Log In
           </a>
           <a
             className="flex h-12 w-full items-center justify-center whitespace-nonwrap rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
