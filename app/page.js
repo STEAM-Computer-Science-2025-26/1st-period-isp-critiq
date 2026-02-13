@@ -1,13 +1,13 @@
 import clsx from "clsx";
 function Button({text, textColor, bgColor, w, h})
 {
-  return (<button className={clsx("mr-8", `h-${h}`, `w-${w}`, `rounded-full bg-${bgColor}`, `px-5`, `text-${textColor}`, "transition-colors md:w-[158px]")}>{text}</button>)
+  return (<button className={clsx("mr-8", `h-${h}`, `w-${w}`, `rounded-full bg-${bgColor}`, `px-6`, `text-${textColor}`, "transition-colors md:w-[158px]")}>{text}</button>)
 }
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-200 font-sans  dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-10 px-10 bg-white dark:bg-black sm:items-start">
+    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans  dark:bg-black">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-10 px-10 bg-white dark:bg-black sm:items-center">
         <img
           src="/Critiq.svg"
           alt="critiq.js logo"
@@ -15,7 +15,7 @@ export default function Home() {
           height={30}
         />    
 
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+        <div className="flex flex-col items-center gap-6 text-center sm:items-center sm:text-center">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             
             {/*Red Hello Button*/}

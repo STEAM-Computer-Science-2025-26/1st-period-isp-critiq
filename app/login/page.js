@@ -7,9 +7,16 @@ function Button({text, textColor, bgColor, w, h})
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-center py-32 px-16 bg-white dark:bg-black">
-
+        <div className="flex w-full max-w-3xl flex-col items-center py-10 px-10 bg-white dark:bg-black sm:items-center">
+          <img
+            src="/Critiq.svg"
+            alt="critiq.js logo"
+            width={100}
+            height={30}
+          />   
+        </div>
         <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             Log In
@@ -44,7 +51,7 @@ export default function Home() {
           </a>
           <a
             className="flex h-12 w-full items-center justify-center whitespace-nonwrap rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
-            href="#"
+            href="https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev/password"
           >
             Forgot Password?
           </a>
