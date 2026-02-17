@@ -18,25 +18,25 @@ export default function Home() {
           />   
         </div>
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="max-w-xs text-5xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             Sign Up
           </h1>
           <form className="flex flex-col gap-4 w-full max-w-md">
             <input
               type="email"
               placeholder="Email"
-              className="h-12 px-4 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-black dark:text-zinc-50"
+              className="h-14 px-6 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-black dark:text-zinc-50"
               required
             />
             <input
               type="password"
               placeholder="Password"
-              className="h-12 px-4 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-black dark:text-zinc-50"
+              className="h-14 px-6 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-black dark:text-zinc-50"
               required
             />
             <button
               type="submit"
-              className="h-12 w-full rounded-full bg-red-500 px-5 text-white transition-colors hover:bg-red-600"
+              className="h-14 w-full rounded-full bg-red-500 px-5 text-white transition-colors hover:bg-red-600"
             >
               Sign Up
             </button>
