@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import Link from 'next/link';
 function Button({text, textColor, bgColor, w, h})
 {
   return (<button className={clsx(`mr-8 h-${h} w-${w} rounded-full bg-${bgColor} px-5 text-${textColor} transition-colors md:w-[158px]`)}>{text}</button>)
@@ -43,18 +44,18 @@ export default function Home() {
           </form>
         </div>
         <div className="m-8 flex flex-col gap-4 text-base font-medium sm:flex-row justify-center">
-          <a
+          <Link
             className="flex h-12 w-full items-center justify-center rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev/login"
+            href="/login"
           >
             Log In
-          </a>
-          <a
+          </Link>
+          <Link
             className="flex h-12 w-full items-center justify-center whitespace-nonwrap rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
-            href="https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev/password"
+            href="/password"
           >
             Forgot Password?
-          </a>
+          </Link>
         </div>
       </main>
     </div>
