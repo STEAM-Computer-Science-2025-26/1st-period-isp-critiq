@@ -1,4 +1,3 @@
-import Image from "next/image";
 import clsx from "clsx";
 import Link from 'next/link';
 function Button({text, textColor, bgColor, w, h})
