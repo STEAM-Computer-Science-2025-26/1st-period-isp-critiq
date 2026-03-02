@@ -14,6 +14,7 @@ export default function Home() {
           alt="critiq.js logo"
           width={100}
           height={30}
+          className="dark:border-white/[.145] dark:bg-white dark:hover:bg-[#e6e6e6] dark:rounded-sm px-2"
         />    
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-center sm:text-center">
@@ -44,7 +45,7 @@ export default function Home() {
               href="/Categories"
               className="font-medium text-zinc-950 dark:text-zinc-50"
             >
-              categories
+              Categories
             </Link> {" "}
 
           </p>
@@ -57,7 +58,7 @@ export default function Home() {
             Sign Up
           </Link>
           <Link
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:bg-white dark:hover:bg-[#e6e6e6] md:w-[158px]"
             href="/login"
           >
             Log In
