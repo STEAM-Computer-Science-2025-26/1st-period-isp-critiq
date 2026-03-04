@@ -26,6 +26,18 @@ function hashPassword(password) {
 }
 
 const server = http.createServer(async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+  if (req.url === "/" && req.method === "GET") {
+    return sendJSON(res, 200, { status: "ok" });
+  }
   if (req.url === "/signup" && req.method === "POST") {
     const raw = await readBody(req);
     let body;
@@ -44,7 +56,7 @@ const server = http.createServer(async (req, res) => {
     return sendJSON(res, 201, { id: user.id, email: user.email });
   }
 
-  sendJSON(res, 404, { error: "Not found" });
+  sendJSON(res, 404, { error: "Not Found" });
 });
 
 server.listen(PORT, () => console.log(`Signup server running on port ${PORT}`));
