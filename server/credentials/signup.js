@@ -1,11 +1,14 @@
-// backend/signup.js
 const http = require("http");
 const crypto = require("crypto");
+const { createClient } = require("@supabase/supabase-js");
+require("dotenv").config({ path: ".env.local" });
 
-const PORT = 5001; // different port so it won’t conflict
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
-// Mock DB
-const users = [];
+const PORT = 5001; 
 
 function sendJSON(res, status, obj) {
   res.writeHead(status, { "Content-Type": "application/json" });
@@ -47,13 +50,22 @@ const server = http.createServer(async (req, res) => {
     if (!email || !email.includes("@")) return sendJSON(res, 400, { error: "Valid email required" });
     if (!password || password.length < 8) return sendJSON(res, 400, { error: "Password too short" });
 
-    const exists = users.find(u => u.email === email.toLowerCase());
-    if (exists) return sendJSON(res, 409, { error: "Email already exists" });
+  const passwordHash = hashPassword(password);
 
-    const user = { id: crypto.randomUUID(), email: email.toLowerCase(), passwordHash: hashPassword(password) };
-    users.push(user);
+  const { data, error } = await supabase
+    .from("user_base")
+    .insert([
+      {
+        email: email.toLowerCase(),
+        password: passwordHash
+      }
+    ]);
 
-    return sendJSON(res, 201, { id: user.id, email: user.email });
+  if (error) {
+    return sendJSON(res, 500, { error: error.message });
+  }
+
+  return sendJSON(res, 201, { success: true, data });
   }
 
   sendJSON(res, 404, { error: "Not Found" });
