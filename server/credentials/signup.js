@@ -1,3 +1,11 @@
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("UNHANDLED PROMISE:", err);
+});
+
 const http = require("http");
 const crypto = require("crypto");
 const { createClient } = require("@supabase/supabase-js");
@@ -44,31 +52,59 @@ const server = http.createServer(async (req, res) => {
   if (req.url === "/signup" && req.method === "POST") {
     const raw = await readBody(req);
     let body;
-    try { body = JSON.parse(raw); } catch { return sendJSON(res, 400, { error: "Invalid JSON" }); }
 
-    const { email, password } = body;
-    if (!email || !email.includes("@")) return sendJSON(res, 400, { error: "Valid email required" });
-    if (!password || password.length < 8) return sendJSON(res, 400, { error: "Password too short" });
+    try {
+      body = JSON.parse(raw);
+    } catch {
+      return sendJSON(res, 400, { error: "Invalid JSON" });
+    }
 
-  const passwordHash = hashPassword(password);
+    const { username, email, password } = body;
 
-  const { data, error } = await supabase
-    .from("user_base")
-    .insert([
-      {
-        email: email.toLowerCase(),
-        password: passwordHash
+    if (!email || !email.includes("@"))
+      return sendJSON(res, 400, { error: "Valid email required" });
+
+    if (!password || password.length < 8)
+      return sendJSON(res, 400, { error: "Password too short" });
+
+    const passwordHash = hashPassword(password);
+
+    const { data: existing } = await supabase
+      .from("user_base")
+      .select("id")
+      .eq("email", email.toLowerCase())
+      .maybeSingle();
+
+    if (existing) {
+      return sendJSON(res, 400, { error: "Email already registered" });
+    }
+
+    const { data, error } = await supabase
+      .from("user_base")
+      .insert([
+        {
+          username: username,
+          email: email.toLowerCase(),
+          password: passwordHash
+        }
+      ]);
+
+    if (error) {
+      if (error.message.includes("duplicate key")) {
+        return sendJSON(res, 400, { error: "That email is already registered. Try logging in instead." });
       }
-    ]);
 
-  if (error) {
-    return sendJSON(res, 500, { error: error.message });
+      return sendJSON(res, 500, { error: "Something went wrong creating the account." });
+    }
+
+    return sendJSON(res, 201, { success: true, data });
   }
 
-  return sendJSON(res, 201, { success: true, data });
-  }
-
+  // 👇 THIS must be inside createServer
   sendJSON(res, 404, { error: "Not Found" });
+
 });
 
-server.listen(PORT, () => console.log(`Signup server running on port ${PORT}`));
+server.listen(PORT, () => {
+  console.log(`Signup server running on port ${PORT}`);
+});

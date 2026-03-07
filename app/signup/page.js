@@ -22,6 +22,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [username, setUsername] = useState("");
   const router = useRouter();
 
   // ✅ ADDED SUBMIT HANDLER
@@ -39,7 +40,7 @@ export default function Home() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ username, email, password }),
         }
       );
 
@@ -87,6 +88,15 @@ export default function Home() {
             className="flex flex-col gap-4 w-full max-w-md"
           >
             <input
+              type="Text"
+              placeholder="Username"
+              required
+              className="h-14 px-6 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-black dark:text-zinc-50"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <input
               type="email"
               placeholder="Email"
               required
@@ -129,7 +139,7 @@ export default function Home() {
           </Link>
 
           <Link
-            className="flex h-12 w-full items-center justify-center whitespace-nonwrap  dark:bg-white rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
+            className="flex h-12 w-full items-center justify-center whitespace-nowrap  dark:bg-white rounded-full border border-solid border-black/[.08] px-8 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-auto"
             href="/password"
           >
             Forgot Password?
