@@ -2,15 +2,15 @@ const http = require("http");
 const { createClient } = require("@supabase/supabase-js");
 require("dotenv").config({ path: ".env.local" });
 
-const signup = require("./credentials/signup");
-const login = require("./credentials/login");
+const signup = require("./credentials/signup.js");
+const login = require("./credentials/login.js");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
 
-const PORT = 5001;
+const PORT = 5000;
 
 function sendJSON(res, status, obj) {
   res.writeHead(status, { "Content-Type": "application/json" });
