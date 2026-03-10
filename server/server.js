@@ -10,7 +10,7 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY
 );
 
-const PORT = 5000;
+const PORT = 5001;
 
 function sendJSON(res, status, obj) {
   res.writeHead(status, { "Content-Type": "application/json" });

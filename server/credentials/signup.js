@@ -5,7 +5,7 @@ function hashPassword(password) {
 }
 
 async function signup(req, res, supabase, sendJSON, readBody) {
-
+  console.log("Signup route hit");
   const raw = await readBody(req);
   let body;
 
