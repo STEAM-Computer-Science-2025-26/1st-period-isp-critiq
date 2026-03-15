@@ -7,10 +7,12 @@ const login = require("./credentials/login.js");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 const PORT = 5001;
+console.log("SUPABASE URL:", process.env.SUPABASE_URL);
+
 
 function sendJSON(res, status, obj) {
   res.writeHead(status, { "Content-Type": "application/json" });
@@ -50,7 +52,6 @@ const server = http.createServer(async (req, res) => {
   }
 
   sendJSON(res, 404, { error: "Not Found" });
-
 });
 
 server.listen(PORT, () => {

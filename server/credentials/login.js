@@ -4,6 +4,7 @@ function hashPassword(password) {
   return crypto.createHash("sha256").update(password).digest("hex");
 }
 async function login(req, res, supabase, sendJSON, readBody) {
+  console.log("LOGIN ROUTE HIT");
   const raw = await readBody(req);
   let body;
   try {
@@ -14,15 +15,25 @@ async function login(req, res, supabase, sendJSON, readBody) {
 
   const { email, password } = body;
 
-  const passwordHash = hashPassword(password);
+  console.log(email.toLowerCase(), hashPassword(password));
 
-  const { data: user } = await supabase
+  const passwordHash = hashPassword(password);
+  const { data: allUsers } = await supabase
     .from("user_base")
-    .select("*")
+    .select("email");
+
+  console.log("ALL EMAILS:", allUsers);
+
+  const { data: user, error } = await supabase
+    .from("user_base")
+    .select("email, password")
     .eq("email", email.toLowerCase())
+    .eq("password", passwordHash)
     .maybeSingle();
 
   if (!user || user.password !== passwordHash) {
+    console.log(user)
+    console.log(error)
     return sendJSON(res, 401, { error: "Invalid email or password" });
   }
 
