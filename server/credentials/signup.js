@@ -33,11 +33,11 @@ async function signup(req, res, supabase, sendJSON, readBody) {
     .select("id")
     .eq("email", email.toLowerCase())
     .maybeSingle();
-/*
+
   if (existing) {
     return sendJSON(res, 400, { error: "Email already registered" });
   }
-*/
+
   const { error } = await supabase
     .from("user_base")
     .insert([

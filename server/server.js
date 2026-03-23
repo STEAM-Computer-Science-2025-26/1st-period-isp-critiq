@@ -11,8 +11,6 @@ const supabase = createClient(
 );
 
 const PORT = 5001;
-console.log("SUPABASE URL:", process.env.SUPABASE_URL);
-
 
 function sendJSON(res, status, obj) {
   res.writeHead(status, { "Content-Type": "application/json" });

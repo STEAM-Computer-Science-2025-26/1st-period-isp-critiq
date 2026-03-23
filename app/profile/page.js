@@ -28,7 +28,7 @@ export default function UserProfile() {
           <img
             src="/profileImage.svg"
             alt="User Avatar"
-            className="w-32 h-32 rounded-full border-4 border-gray-300 dark:border-gray-600"
+            className="w-32 h-32 rounded-full border-5 border-gray-300 dark:border-gray-600"
           />
           <div className="flex flex-col gap-2 text-center sm:text-left">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Username</h1>
