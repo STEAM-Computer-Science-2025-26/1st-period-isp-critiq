@@ -52,6 +52,7 @@ export default function Home() {
 
       if (!res.ok) {
         setMessage(data.error || "Signup failed");
+        //this above is returning duplicate key value violates unique constraint "user_base_email_key"
         return;
       }
 

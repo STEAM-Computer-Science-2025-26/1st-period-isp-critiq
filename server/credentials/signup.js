@@ -33,11 +33,11 @@ async function signup(req, res, supabase, sendJSON, readBody) {
     .select("id")
     .eq("email", email.toLowerCase())
     .maybeSingle();
-
+/*
   if (existing) {
     return sendJSON(res, 400, { error: "Email already registered" });
   }
-
+*/
   const { error } = await supabase
     .from("user_base")
     .insert([
@@ -49,9 +49,18 @@ async function signup(req, res, supabase, sendJSON, readBody) {
     ]);
 
   if (error) {
+    console.log("SUPABASE ERROR:", error);
+
+    if (error.code === "23505") {
+      return sendJSON(res, 400, { error: "Email already registered" });
+    }
+
+    if (error.code === "42501") {
+      return sendJSON(res, 500, { error: "Database permission error" });
+    }
+
     return sendJSON(res, 500, { error: "Database error" });
   }
-
   return sendJSON(res, 201, { success: true });
 
 }
