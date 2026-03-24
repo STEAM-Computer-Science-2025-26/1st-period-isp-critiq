@@ -18,22 +18,22 @@ function Button({ text, textColor, bgColor, w, h }) {
 }
 
 export default function Home() {
-  // ✅ ADDED STATE (does NOT affect UI)
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [username, setUsername] = useState("");
   const router = useRouter();
 
-  // ✅ ADDED SUBMIT HANDLER
+
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("SUBMIT CLICKED"); // ✅ ADD THIS
+    console.log("SUBMIT CLICKED");
     setMessage("Loading...");
 
     try {
-      console.log("SENDING REQUEST"); // ✅ ADD THIS
+      console.log("SENDING REQUEST"); 
 
       const res = await fetch(
         "https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/signup",
@@ -44,11 +44,11 @@ export default function Home() {
         }
       );
 
-      console.log("RESPONSE STATUS:", res.status); // ✅ ADD
-      console.log("RES.OK:", res.ok); // ✅ ADD
+      console.log("RESPONSE STATUS:", res.status); 
+      console.log("RES.OK:", res.ok); 
 
       const data = await res.json();
-      console.log("RESPONSE DATA:", data); // ✅ ADD
+      console.log("RESPONSE DATA:", data); 
 
       if (!res.ok) {
         setMessage(data.error || "Signup failed");
@@ -60,7 +60,7 @@ export default function Home() {
       router.push("/login");
 
     } catch (err) {
-      console.error("FETCH ERROR:", err); // ✅ ADD
+      console.error("FETCH ERROR:", err); 
       setMessage("Backend not running");
     }
   }
@@ -83,7 +83,6 @@ export default function Home() {
             Sign Up
           </h1>
 
-          {/* ✅ ONLY CHANGE: onSubmit */}
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 w-full max-w-md"
@@ -122,7 +121,6 @@ export default function Home() {
               Sign Up
             </button>
 
-            {/* ✅ MESSAGE DISPLAY (no layout change) */}
             {message && (
               <p className="text-sm text-black dark:text-white">
                 {message}
