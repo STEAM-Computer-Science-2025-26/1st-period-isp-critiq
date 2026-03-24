@@ -1,8 +1,3 @@
-1- npm install
-2- npm run dev
-
-
-
 flex - Uses flexbox layout
 min-h-screen - Minimum height of 100% of the viewport
 items-center - Centers items vertically

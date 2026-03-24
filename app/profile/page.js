@@ -93,7 +93,6 @@ export default function UserProfile() {
             <Link href="#" className="text-blue-600 dark:text-blue-400 hover:underline">Website</Link>
           </div>
         </div>
-
       </main>
     </div>
   );

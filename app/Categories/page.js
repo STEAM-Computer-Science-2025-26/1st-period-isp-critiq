@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 
 function Button({text, textColor, bgColor, w, h})
 {
@@ -30,53 +31,71 @@ function CategoryCard({imageSrc, title, description})
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
-      {/**/}
-      
-      <main className="flex min-h-screen w-full flex-col items-center justify-top py-10 px-16 bg-white dark:bg-black">
+      {/*Sidebar*/}
+      <aside className="w-50 min-h-screen bg-gray-100 dark:bg-zinc-900 px-6 py-10 flex flex-col gap-6 shadow-md">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white text-red-500 hover:text-red-600 transition-colors">Navigate</h2>
+        <nav className="flex flex-col gap-3">
+          <a href="/"className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Main</a>
+          <a href="/login" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Login</a>
+          <a href="/signup" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Signup</a>
+          <a href="/change-password" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Change Password</a>
+        </nav>
+      </aside>
+
+      {/*Main stuff*/}
+      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white dark:bg-black">
         <div className="flex flex-col items-center gap-6 text-center">
 
-          <h1 className="max-w-s text-5xl font-bold leading-10 tracking-tight text-white dark:text-zinc-50 border-1 px-14 py-5 rounded-xl bg-red-600 hover:bg-red-500 transition-colors ring ring-1 ring-offset-3 ring-offset-black ring-white-600 hover:ring-white-500 cursor-pointer">
+          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
           Browse All Categories
           </h1>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
-            {/*hotel card*/}
-            <div>
-              <CategoryCard
-                imageSrc="/HotelImage.svg"
-                title="Hotels"
-                description="Hotel Del Coronado, San Diego"
-              />
-            </div>
+            <Link href="/Categories/Hotels">
+              <div>
+                {/*Card 1*/}
+                <div>
+                  <CategoryCard
+                    imageSrc="/HotelImage.svg"
+                    title="Hotels"
+                    description="Hotel Del Coronado, San Diego"
+                  />
+                </div>
+              </div>
+            </Link>
             
             {/*restaurant card*/}
-            <div>
-              <CategoryCard
-                imageSrc="/RestaurantCard.svg"
-                title="Restaurants"
-                description="Amara At Paraiso, Miami"
-              />
-            </div>
+            <Link href ="/Categories/Restaurants">
+              <div>
+                <CategoryCard
+                  imageSrc="/RestaurantCard.svg"
+                  title="Restaurants"
+                  description="Amara At Paraiso, Miami"
+                />
+              </div>
+            </Link>
 
             {/*park card*/}
-            <div>
-              <CategoryCard
-                imageSrc="/ParkCard.svg"
-                title="Parks"
-                description="Central Park, New York City"
-              />
-            </div>
+            <Link href ="/Categories/Parks">
+              <div>
+                <CategoryCard
+                  imageSrc="/ParkCard.svg"
+                  title="Parks"
+                  description="Central Park, New York City"
+                />
+              </div>
+            </Link>
           </div>
 
+          {/*Second Row*/}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
             {/*gym card*/}
             <div>
               <CategoryCard
-                className="object-fill"
                 imageSrc="/GymCard.svg"
                 title="Gyms"
                 description="Planet Fitness, Los Angeles"
               />
-            </div>
+            </div>  
 
             {/*museum card*/}
             <div>
