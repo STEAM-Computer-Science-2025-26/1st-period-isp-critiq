@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
+import Navbar from "./components/Navbar.js";
 
 function Button({text, textColor, bgColor, w, h})
 {
@@ -64,6 +65,7 @@ function ScrollingSide({ categories, side = "left" }) {
 
 export default function Home() {
   // shared data for both sides
+  <Navbar />
   const sideCategories = [
     {
       imageSrc: "/HotelImage.svg",
