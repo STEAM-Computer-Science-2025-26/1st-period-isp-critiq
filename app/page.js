@@ -27,7 +27,7 @@ function CategoryCard({imageSrc, title, description, w, h})
     </div>
   );
 }
-//hello Gabe
+
 // utility component for the two side panels
 function ScrollingSide({ categories, side = "left" }) {
   const list = [...categories, ...categories];
