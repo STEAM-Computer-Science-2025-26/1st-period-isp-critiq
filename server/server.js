@@ -4,6 +4,7 @@ require("dotenv").config({ path: ".env.local" });
 
 const signup = require("./credentials/signup.js");
 const login = require("./credentials/login.js");
+const me = require("./credentials/me.js");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -28,10 +29,10 @@ function readBody(req) {
 
 const server = http.createServer(async (req, res) => {
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Origin", "https://bookish-cod-rq5jpjqvjg524p6-3000.app.github.dev");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
   if (req.method === "OPTIONS") {
     res.writeHead(204);
     return res.end();
@@ -47,6 +48,10 @@ const server = http.createServer(async (req, res) => {
 
   if (req.url === "/login" && req.method === "POST") {
     return login(req, res, supabase, sendJSON, readBody);
+  }
+
+  if (req.url === "/me" && req.method === "GET") {
+    return me(req, res, supabase, sendJSON);
   }
 
   sendJSON(res, 404, { error: "Not Found" });

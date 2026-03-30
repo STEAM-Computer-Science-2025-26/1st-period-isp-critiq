@@ -26,7 +26,7 @@ async function login(req, res, supabase, sendJSON, readBody) {
 
   const { data: user, error } = await supabase
     .from("user_base")
-    .select("email, password")
+    .select("id, email, password")
     .eq("email", email.toLowerCase())
     .eq("password", passwordHash)
     .maybeSingle();
@@ -36,12 +36,15 @@ async function login(req, res, supabase, sendJSON, readBody) {
     console.log(error)
     return sendJSON(res, 401, { error: "Invalid email or password" });
   }
-
+  
+  res.setHeader(
+  "Set-Cookie",
+  `session=${user.id}; HttpOnly; Path=/; Max-Age=3600; SameSite=None; Secure`
+  );
   return sendJSON(res, 200, {
     success: true,
     userId: user.id
   });
-
 }
 
 module.exports = login;
