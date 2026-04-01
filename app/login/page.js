@@ -25,11 +25,12 @@ export default function Home() {
 
     try {
       console.log("SENDING REQUEST"); 
-
+      
       const res = await fetch(
         "https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/login",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         }

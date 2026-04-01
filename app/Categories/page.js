@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 function Button({text, textColor, bgColor, w, h})
 {
@@ -9,18 +10,18 @@ function Button({text, textColor, bgColor, w, h})
 function CategoryCard({imageSrc, title, description})
 {
   return (
-    <div className="max-w-sm rounded-3xl overflow-hidden shadow-lg ring-3 ring-gray-500 cursor-pointer transition-transform hover:scale-[1.05] duration-200 hover:brightness-75 dark:ring-gray-100">
+    <div className="max-w-sm rounded-3xl overflow-hidden shadow-lg ring-3 ring-gray-500 cursor-pointer transition-transform hover:scale-[1.05] duration-200 hover:brightness-75">
       <img
         src={imageSrc}
         alt={`${title} Image`}
         width={400}
         height={30}
-        className="flex dark:border-white/[.145] dark:bg-white dark:hover:bg-[#e6e6e6] dark:rounded-sm"
+        className="flex w-full h-auto aspect-video object-cover"
       />
 
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 dark:text-white">{title}</div>
-          <p className="text-gray-700 text-base dark:text-white">
+        <div className="font-bold text-xl mb-2">{title}</div>
+          <p className="text-gray-700 text-base">
             {description}
           </p>
         </div>
@@ -30,23 +31,14 @@ function CategoryCard({imageSrc, title, description})
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
-      {/*Sidebar*/}
-      <aside className="w-50 min-h-screen bg-gray-100 dark:bg-zinc-900 px-6 py-10 flex flex-col gap-6 shadow-md">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white text-red-500 hover:text-red-600 transition-colors">Navigate</h2>
-        <nav className="flex flex-col gap-3">
-          <a href="/"className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Main</a>
-          <a href="/login" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Login</a>
-          <a href="/signup" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Signup</a>
-          <a href="/change-password" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Change Password</a>
-        </nav>
-      </aside>
-
+    
+    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans">
       {/*Main stuff*/}
-      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white dark:bg-black">
-        <div className="flex flex-col items-center gap-6 text-center">
+      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top bg-white">
+        <Navbar />
+        <div className="flex flex-col items-center gap-6 text-center py-0 mt-0">
 
-          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
+          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
           Browse All Categories
           </h1>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">

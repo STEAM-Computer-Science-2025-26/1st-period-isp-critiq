@@ -1,5 +1,8 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 // Reusable Button Component
 function Button({ text, textColor, bgColor, w, h }) {
@@ -19,6 +22,27 @@ function Button({ text, textColor, bgColor, w, h }) {
 }
 
 export default function UserProfile() {
+
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    async function checkUser() {
+      const res = await fetch("https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/me", {
+      credentials: "include"
+      });
+
+      const data = await res.json();
+      setUser(data);
+      console.log(data);
+
+      if (!res.ok) {
+        // not logged in → redirect
+        window.location.href = "/login";
+      }
+    }
+
+    checkUser();
+  }, []);
   return (
     <div className="min-h-screen bg-red-200 dark:bg-gray-900 font-sans flex justify-center py-10 px-4">
       <main className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col gap-8">
@@ -31,7 +55,7 @@ export default function UserProfile() {
             className="w-32 h-32 rounded-full border-5 border-gray-300 dark:border-gray-600"
           />
           <div className="flex flex-col gap-2 text-center sm:text-left">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Username</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">{user?.username}</h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-md">
               Enter Bio Here
             </p>
