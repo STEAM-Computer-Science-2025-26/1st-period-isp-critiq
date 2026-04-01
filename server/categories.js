@@ -1,72 +1,27 @@
+require("dotenv").config({ path: ".env.local" });
+
 const http = require("http");
+const { createClient } = require("@supabase/supabase-js");
 
 const PORT = 5000;
 
-const categories = [
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
   {
-    id: "hotels",
-    label: "Hotels",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "Hotel Del Coronado",
-    featuredLocation: "San Diego",
-    route: "/categories/hotels",
-  },
-  {
-    id: "restaurants",
-    label: "Restaurants",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "Amara At Paraiso",
-    featuredLocation: "Miami",
-    route: "/categories/restaurants",
-  },
-  {
-    id: "parks",
-    label: "Parks",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "Central Park",
-    featuredLocation: "New York City",
-    route: "/categories/parks",
-  },
-  {
-    id: "movie-theaters",
-    label: "Movie Theaters",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "AMC Theater",
-    featuredLocation: "Dallas",
-    route: "/categories/movie-theaters",
-  },
-  {
-    id: "apartments",
-    label: "Apartments",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "The Ashton",
-    featuredLocation: "Austin",
-    route: "/categories/apartments",
-  },
-  {
-    id: "shopping",
-    label: "Shopping",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "Galleria",
-    featuredLocation: "Houston",
-    route: "/categories/shopping",
-  },
-  {
-    id: "gyms",
-    label: "Gyms",
-    imageUrl: "", // frontend image URL path needed here
-    featuredName: "Planet Fitness",
-    featuredLocation: "Los Angeles",
-    route: "/categories/gyms",
-  },
-];
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  }
+);
 
 function sendJSON(res, statusCode, obj) {
   res.writeHead(statusCode, { "Content-Type": "application/json" });
   res.end(JSON.stringify(obj));
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -84,18 +39,36 @@ const server = http.createServer((req, res) => {
   }
 
   if (path === "/categories" && req.method === "GET") {
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id, label, imageUrl, featuredName, featuredLocation, route")
+      .order("label", { ascending: true });
+
+    if (error) {
+      return sendJSON(res, 500, { error: error.message });
+    }
+
     return sendJSON(res, 200, {
       title: "Browse All Categories",
-      categories,
+      categories: data,
     });
   }
 
   const match = path.match(/^\/categories\/([a-z0-9-]+)$/);
   if (match && req.method === "GET") {
     const id = match[1];
-    const category = categories.find((c) => c.id === id);
-    if (!category) return sendJSON(res, 404, { error: "Category not found", id });
-    return sendJSON(res, 200, { category });
+
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id, label, imageUrl, featuredName, featuredLocation, route")
+      .eq("id", id)
+      .single();
+
+    if (error || !data) {
+      return sendJSON(res, 404, { error: "Category not found", id });
+    }
+
+    return sendJSON(res, 200, { category: data });
   }
 
   return sendJSON(res, 404, { error: "Not found", path });
