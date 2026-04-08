@@ -2,29 +2,22 @@ import clsx from "clsx";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 
-function Button({text, textColor, bgColor, w, h})
-{
-  return (<button className={clsx(`mr-0 h-${h} w-${w} rounded-2xl bg-${bgColor} px-5 text-${textColor} transition-colors md:w-[158px] hover:scale-[1.5] duration-300 hover:bg-red-600 cursor-pointer`)}>{text}</button>)
-}
-
 function CategoryCard({imageSrc, title, description})
 {
   return (
-    <div className="max-w-sm rounded-3xl overflow-hidden shadow-lg ring-3 ring-gray-500 cursor-pointer transition-transform hover:scale-[1.05] duration-200 hover:brightness-75">
+    <div className="w-80 h-[18rem] rounded-3xl overflow-hidden shadow-lg ring-3 ring-gray-500 cursor-pointer transition-transform hover:scale-[1.05] duration-200 hover:brightness-75 flex flex-col">
       <img
         src={imageSrc}
         alt={`${title} Image`}
-        width={400}
-        height={30}
-        className="flex w-full h-auto aspect-video object-cover"
+        className="w-full h-48 object-cover"
       />
 
-      <div className="px-6 py-4">
+      <div className="flex-1 px-6 py-4 flex flex-col">
         <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-gray-700 text-base">
-            {description}
-          </p>
-        </div>
+        <p className="text-gray-700 text-base flex-1">
+          {description}
+        </p>
+      </div>
     </div>
   );
 }
@@ -36,9 +29,9 @@ export default function Home() {
       {/*Main stuff*/}
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top bg-white">
         <Navbar />
-        <div className="flex flex-col items-center gap-6 text-center py-0 mt-0">
+        <div className="flex flex-col items-center gap-0 text-center">
 
-          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
+          <h1 className="flex h-25 w-full text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
           Browse All Categories
           </h1>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
@@ -47,7 +40,7 @@ export default function Home() {
                 {/*Card 1*/}
                 <div>
                   <CategoryCard
-                    imageSrc="/HotelImage.svg"
+                    imageSrc="/HotelCard.svg"
                     title="Hotels"
                     description="Hotel Del Coronado, San Diego"
                   />

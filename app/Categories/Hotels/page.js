@@ -1,3 +1,4 @@
+import Navbar from "@/app/components/Navbar";
 import clsx from "clsx";
 
 function Button({text, textColor, bgColor, w, h})
@@ -13,12 +14,12 @@ function CategoryCard({imageSrc, title, description, rating})
         src={imageSrc}
         alt={`${title} Image`}
         // constrain to card width and allow height to adjust, using contain to avoid cropping
-        className="w-full max-h-48 object-contain dark:border-white/[.145] dark:bg-white dark:hover:bg-[#e6e6e6] dark:rounded-sm"
+        className="w-full max-h-48 object-contain"
       />
 
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 dark:text-white">{title}</div>
-          <p className="text-gray-700 text-base dark:text-white">
+        <div className="font-bold text-xl mb-2">{title}</div>
+          <p className="text-gray-700 text-base">
             {description}
           </p>
           <div className="flex items-center mt-2">
@@ -44,36 +45,108 @@ function CategoryCard({imageSrc, title, description, rating})
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans">
       {/*Sidebar*/}
-      <aside className="w-50 min-h-screen bg-gray-100 dark:bg-zinc-900 px-6 py-10 flex flex-col gap-6 shadow-md">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white text-red-500 hover:text-black transition-colors">Navigate</h2>
-        <nav className="flex flex-col gap-3">
-          <a href="/" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Main</a>
-          <a href="/login" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Login</a>
-          <a href="/signup" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Signup</a>
-          <a href="/change-password" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Change Password</a>
-          <a href="/Categories/Hotels" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Hotels</a>
-          <a href="/Categories/Restaurants" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Restaurants</a>
-          <a href="/Categories/Gyms" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Gyms</a>
-          <a href="/Categories/Parks" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Parks</a>
-          <a href="/Categories/Museums" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Museums</a>
-        </nav>
-      </aside>
-
+      
       {/*Main stuff*/}
-      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white dark:bg-black">
-        <div className="flex flex-col items-center gap-6 text-center">
+      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white">
+        <Navbar />
+        <div className="flex flex-col items-center gap-0 text-center">
 
-          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
+          <h1 className="flex h-25 w-full text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
           Hotels
           </h1>
+
+          {/* Most Reviewed Hotels */}
+          <div className="w-full px-5 py-5">
+            <h2 className="text-3xl font-bold text-left mb-4">Most Reviewed Hotels</h2>
+            <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
+              <div>
+                <CategoryCard
+                  imageSrc="/HotelCard.svg"
+                  title="Hotel del Coronado, San Diego"
+                  rating={5}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/PalmHouse.svg"
+                  title="Palm House, Palm Beach"
+                  rating={4.5}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/BabAlShams.svg"
+                  title="Bab Al Shams, Dubai"
+                  rating={5}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Popular in Your Area */}
+          <div className="w-full px-5 py-5">
+            <h2 className="text-3xl font-bold text-left mb-4">Popular in Your Area</h2>
+            <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
+              <div>
+                <CategoryCard
+                  imageSrc="/HotelCard.svg"
+                  title="Local Hotel A"
+                  rating={4.2}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/PalmHouse.svg"
+                  title="Local Hotel B"
+                  rating={4.0}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/BabAlShams.svg"
+                  title="Local Hotel C"
+                  rating={4.8}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Top Rated Hotels */}
+          <div className="w-full px-5 py-5">
+            <h2 className="text-3xl font-bold text-left mb-4">Top Rated Hotels</h2>
+            <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
+              <div>
+                <CategoryCard
+                  imageSrc="/HotelCard.svg"
+                  title="Luxury Resort X"
+                  rating={5}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/PalmHouse.svg"
+                  title="Boutique Hotel Y"
+                  rating={4.9}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/BabAlShams.svg"
+                  title="Historic Inn Z"
+                  rating={4.7}
+                />
+              </div>
+            </div>
+          </div>
+
           {/*First Row*/}
           <div className="flex flex-wrap items-stretch justify-left gap-4 my-5 mx-5 px-4 overflow-visible h-auto">
             {/*Card 1*/}
             <div>
               <CategoryCard
-                imageSrc="/HotelImage.svg"
+                imageSrc="/HotelCard.svg"
                 title="Hotel del Coronado, San Diego"
                 rating={5}
                 className="m-4"
@@ -101,7 +174,7 @@ export default function Home() {
             {/*Card 4*/}
             <div>
               <CategoryCard
-                imageSrc="/HotelImage.svg"
+                imageSrc="/HotelCard.svg"
                 title="Hotels"
                 rating={3}
               />
@@ -110,7 +183,7 @@ export default function Home() {
             {/*Card 5*/}
             <div>
               <CategoryCard
-                imageSrc="/HotelImage.svg"
+                imageSrc="/HotelCard.svg"
                 title="Hotels"
                 rating={4.2}
                 />

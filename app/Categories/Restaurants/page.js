@@ -30,23 +30,9 @@ function CategoryCard({imageSrc, title, description})
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
-      {/*Sidebar*/}
-      <aside className="w-50 min-h-screen bg-gray-100 dark:bg-zinc-900 px-6 py-10 flex flex-col gap-6 shadow-md">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white text-red-500 hover:text-black transition-colors">Navigate</h2>
-        <nav className="flex flex-col gap-3">
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Main</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Login</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Signup</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Change Password</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Hotels</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Restaurants</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Gyms</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Parks</a>
-          <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors">Museums</a>
-        </nav>
-      </aside>
 
       {/*Main stuff*/}
+      <Navbar />
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white dark:bg-black">
         <div className="flex flex-col items-center gap-6 text-center">
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function Navbar() {
   const router = useRouter();
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
 
   async function handleLogout() {
     await fetch("/logout", {
@@ -56,15 +57,15 @@ export default function Navbar() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   
-                  {/* SETTINGS HEADER */}
+                  {/* Settings */}
                   <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Settings</h1>
 
-                  {/* ACCOUNT SETTINGS */}
+                  {/* Account */}
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">Account</h2>
                     <div className="flex flex-col gap-3">
                       <button className="w-full text-left px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Change Password</button>
-                      <button className="w-full text-left px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Email Preferences</button>
+                      <button className="w-full text-left px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Change Email</button>
                     </div>
                   </div>
 
@@ -74,7 +75,7 @@ export default function Navbar() {
                     <div className="flex flex-col gap-3">
                       <label className="flex items-center gap-2">
                         <input type="checkbox" defaultChecked className="w-4 h-4" />
-                        <span>Email Notifications</span>
+                        <span>Recieve Notifications</span>
                       </label>
                       <label className="flex items-center gap-2">
                         <input type="checkbox" defaultChecked className="w-4 h-4" />
@@ -83,20 +84,29 @@ export default function Navbar() {
                     </div>
                   </div>
 
-                  {/* PRIVACY SETTINGS */}
-                  <div>
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">Privacy</h2>
-                    <div className="flex flex-col gap-3">
-                      <label className="flex items-center gap-2">
-                        <input type="checkbox" defaultChecked className="w-4 h-4" />
-                        <span>Public Profile</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input type="checkbox" className="w-4 h-4" />
-                        <span>Show Reviews Publicly</span>
-                      </label>
-                    </div>
-                  </div>
+                  {/* Public or Private */}
+                  <button
+                    onClick={() => setIsPublic(!isPublic)}
+                    className={`relative w-36 h-9 rounded-full transition-colors duration-300 ${
+                      isPublic ? "bg-gray-500" : "bg-red-500"
+                    }`}
+                    aria-label="Toggle profile visibility"
+                  >
+                    {/* Sliding knob */}
+                    <span
+                      className={`absolute top-1 w-16 h-7 bg-black rounded-full shadow transition-transform duration-300 ${
+                        isPublic ? "translate-x-[-4.25rem]" : "translate-x-1"
+                      }`}
+                    />
+
+                    {/* Labels */}
+                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold transition-colors duration-300 ${isPublic ? "text-blue-100" : "text-white"}`}>
+                      Private
+                    </span>
+                    <span className={`absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold transition-colors duration-300 ${isPublic ? "text-white" : "text-green-100"}`}>
+                      Public
+                    </span>
+                  </button>
 
                   {/* CLOSE BUTTON */}
                   <button 

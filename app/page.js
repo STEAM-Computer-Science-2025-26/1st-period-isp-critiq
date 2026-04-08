@@ -51,7 +51,7 @@ export default function Home() {
   <Navbar />
   const sideCategories = [
     {
-      imageSrc: "/HotelImage.svg"
+      imageSrc: "/HotelCard.svg"
     },
     {
       imageSrc: "/RestaurantCard.svg"
