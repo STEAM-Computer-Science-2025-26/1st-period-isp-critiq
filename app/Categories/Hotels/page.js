@@ -1,11 +1,6 @@
 import Navbar from "@/app/components/Navbar";
 import clsx from "clsx";
 
-function Button({text, textColor, bgColor, w, h})
-{
-  return (<button className={clsx(`mr-0 h-${h} w-${w} rounded-2xl bg-${bgColor} px-5 text-${textColor} transition-colors md:w-[158px] hover:scale-[1.5] duration-300 hover:bg-red-600 cursor-pointer`)}>{text}</button>)
-}
-
 function CategoryCard({imageSrc, title, description, rating})
 {
   return (
@@ -46,16 +41,10 @@ function CategoryCard({imageSrc, title, description, rating})
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans">
-      {/*Sidebar*/}
-      
       {/*Main stuff*/}
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white">
         <Navbar />
         <div className="flex flex-col items-center gap-0 text-center">
-
-          <h1 className="flex h-25 w-full text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
-          Hotels
-          </h1>
 
           {/* Most Reviewed Hotels */}
           <div className="w-full px-5 py-5">

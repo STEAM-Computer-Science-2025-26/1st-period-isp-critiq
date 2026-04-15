@@ -1,3 +1,4 @@
+import Navbar from "@/app/components/Navbar";
 import clsx from "clsx";
 
 function Button({text, textColor, bgColor, w, h})
