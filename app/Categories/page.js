@@ -29,6 +29,7 @@ export default function Home() {
       {/*Main stuff*/}
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top bg-white">
         <Navbar />
+        
         <div className="flex flex-col items-center gap-0 text-center">
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
