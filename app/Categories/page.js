@@ -1,4 +1,5 @@
-import clsx from "clsx";
+"use client";
+
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 
@@ -33,7 +34,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-0 text-center">
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
-            <Link href="/Categories/Hotels">
+            <Link href="/Categories/Review?category=Hotels">
               <div>
                 {/*Card 1*/}
                 <div>
