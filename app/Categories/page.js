@@ -29,11 +29,9 @@ export default function Home() {
       {/*Main stuff*/}
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top bg-white">
         <Navbar />
+        
         <div className="flex flex-col items-center gap-0 text-center">
 
-          <h1 className="flex h-25 w-full text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
-          Browse All Categories
-          </h1>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-7 mx-5">
             <Link href="/Categories/Hotels">
               <div>

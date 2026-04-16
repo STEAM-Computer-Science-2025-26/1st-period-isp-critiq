@@ -1,3 +1,4 @@
+import Navbar from "@/app/components/Navbar";
 import clsx from "clsx";
 import Navbar from "@/app/components/Navbar";
 
