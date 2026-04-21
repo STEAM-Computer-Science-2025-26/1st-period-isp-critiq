@@ -5,6 +5,7 @@ require("dotenv").config({ path: ".env.local" });
 const signup = require("./credentials/signup.js");
 const login = require("./credentials/login.js");
 const me = require("./credentials/me.js");
+const reviews = require("./credentials/reviews.js");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -52,6 +53,10 @@ const server = http.createServer(async (req, res) => {
 
   if (req.url === "/me" && req.method === "GET") {
     return me(req, res, supabase, sendJSON);
+  }
+
+  if (req.url.startsWith("/reviews")) {
+    return reviews(req, res, supabase, sendJSON, readBody);
   }
 
   sendJSON(res, 404, { error: "Not Found" });

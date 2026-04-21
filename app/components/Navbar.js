@@ -3,7 +3,17 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
-
+function SearchBar() {
+  return (
+    <div className="w-full flex justify-end px-6 py-3 bg-transparent">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-60 px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+    </div>
+  );
+}
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -37,7 +47,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="w-full flex justify-between items-center px-6 py-4 bg-black text-white">
+    <div className="w-full relative flex items-center px-6 py-4 bg-black text-white">
       {/* LEFT */}
       <Link href="/">
         <img
@@ -50,9 +60,9 @@ export default function Navbar() {
       </Link>
 
       {/* Page Name */}
-        <div className="text-xl font-bold text-white rounded-xl px-4 py-2 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-lg border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-          {getPageName()}
-        </div>
+      <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2">
+        {getPageName()}
+      </div>
 
       {/* RIGHT */}
       <div className="flex gap-8 items-center font-bold relative">

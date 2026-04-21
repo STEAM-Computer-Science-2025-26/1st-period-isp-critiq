@@ -45,7 +45,6 @@ export default function Home() {
       <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white">
         <Navbar />
         <div className="flex flex-col items-center gap-0 text-center">
-
           {/* Most Reviewed Hotels */}
           <div className="w-full px-5 py-5">
             <h2 className="text-3xl font-bold text-left mb-4">Top Rated Hotels</h2>
@@ -62,6 +61,7 @@ export default function Home() {
                   imageSrc="/PalmHouse.svg"
                   title="Palm House, Palm Beach"
                   rating={4.5}
+
                 />
               </div>
               <div>
