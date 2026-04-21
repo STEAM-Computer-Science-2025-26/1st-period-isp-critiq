@@ -3,17 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
-function SearchBar() {
-  return (
-    <div className="w-full flex justify-end px-6 py-3 bg-transparent">
-      <input
-        type="text"
-        placeholder="Search..."
-        className="w-60 px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-    </div>
-  );
-}
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -47,17 +37,15 @@ export default function Navbar() {
   }
 
   return (
-    <div className="w-full relative flex items-center px-6 py-4 bg-black text-white">
+    <div className="w-full flex justify-between items-center px-6 py-4 bg-black text-white">
       {/* LEFT */}
-      <Link href="/">
-        <img
+      <img
           src="/Critiq.svg"
           alt="critiq.js logo"
           width={100}
           height={30}
           className="bg-white p-3 rounded-lg px-2"
         />
-      </Link>
 
       {/* Page Name */}
       <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2">
@@ -157,7 +145,7 @@ export default function Navbar() {
           <button
             onClick={handleLogout}
             className="bg-red-500 px-4 py-2 rounded"
-          >
+        >
           Logout
         </button>
       </div>
