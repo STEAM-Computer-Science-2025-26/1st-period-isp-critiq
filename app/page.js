@@ -81,7 +81,7 @@ export default function Home() {
         <SideScrollPanel className = "mr-5" categories={sideCategories} side="left"/>
         <SideScrollPanel className = "mr-5" categories={sideCategories} side="right"/>
         
-      <main className="relative z-10 flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-10 px-4 sm:px-8 md:px-10 lg:px-10 mx-auto bg-white sm:items-center">
+      <main className="relative z-10 flex min-h-screen w-full max-w-3xl flex-col items-center justify-center py-10 px-4 sm:px-8 md:px-10 lg:px-10 mx-auto bg-white sm:items-center">
         <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black">
         </h1><div className="flex flex-col items-center gap-6 text-center sm:items-center sm:text-center">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black">
@@ -115,7 +115,7 @@ export default function Home() {
             </Link>
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row justify-center pt-6">
+        <div className="flex flex-col gap-4 font-medium sm:flex-row justify-center pt-10">
           <Link
             className="flex h-12 w-full items-center justify-center rounded-full bg-black text-white px-5 transition-colors hover:bg-black/[.80] md:w-[158px]"
             href="/signup"
@@ -128,6 +128,9 @@ export default function Home() {
           >
             Log In
           </Link>
+        </div>
+        <div>
+          <img src="Categories.svg" className="w-full h-auto"/>
         </div>
       </main>
     </div>

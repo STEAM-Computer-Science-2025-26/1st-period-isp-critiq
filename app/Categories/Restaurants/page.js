@@ -15,12 +15,12 @@ function CategoryCard({imageSrc, title, description})
         alt={`${title} Image`}
         width={400}
         height={30}
-        className="flex dark:border-white/[.145] dark:bg-white dark:hover:bg-[#e6e6e6] dark:rounded-sm"
+        className="flex text-black"
       />
 
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 dark:text-white">{title}</div>
-          <p className="text-gray-700 text-base dark:text-white">
+        <div className="font-bold text-xl mb-2">{title}</div>
+          <p className="text-gray-700 text-base">
             {description}
           </p>
         </div>
@@ -30,16 +30,13 @@ function CategoryCard({imageSrc, title, description})
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-red-200 font-sans">
 
       {/*Main stuff*/}
-      <Navbar />
-      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white dark:bg-black">
+      
+      <main className="flex-5 min-h-screen w-full flex-col items-center justify-top py-0 px-0 bg-white">
+        <Navbar />
         <div className="flex flex-col items-center gap-6 text-center">
-
-          <h1 className="flex h-25 w-full m-1 text-5xl font-bold leading-0 tracking-tight items-center justify-center text-white dark:text-zinc-50 border-1 px-14 py-5 bg-zinc-800  hover:bg-gray-800 transition-colors ">
-          Restaurants
-          </h1>
           {/*First Row*/}
           <div className="flex flex-wrap items-center justify-left gap-4 mt-7 mx-5">
             {/*restaurant card*/}

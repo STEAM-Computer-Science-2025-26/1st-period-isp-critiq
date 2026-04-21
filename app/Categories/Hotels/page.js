@@ -48,7 +48,7 @@ export default function Home() {
 
           {/* Most Reviewed Hotels */}
           <div className="w-full px-5 py-5">
-            <h2 className="text-3xl font-bold text-left mb-4">Most Reviewed Hotels</h2>
+            <h2 className="text-3xl font-bold text-left mb-4">Top Rated Hotels</h2>
             <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
               <div>
                 <CategoryCard
@@ -104,7 +104,7 @@ export default function Home() {
 
           {/* Top Rated Hotels */}
           <div className="w-full px-5 py-5">
-            <h2 className="text-3xl font-bold text-left mb-4">Top Rated Hotels</h2>
+            <h2 className="text-3xl font-bold text-left mb-4">Budget Friendly</h2>
             <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
               <div>
                 <CategoryCard
@@ -132,15 +132,6 @@ export default function Home() {
 
           {/*First Row*/}
           <div className="flex flex-wrap items-stretch justify-left gap-4 my-5 mx-5 px-4 overflow-visible h-auto">
-            {/*Card 1*/}
-            <div>
-              <CategoryCard
-                imageSrc="/HotelCard.svg"
-                title="Hotel del Coronado, San Diego"
-                rating={5}
-                className="m-4"
-              />
-            </div>
             
             {/*Card 2*/}
             <div>
