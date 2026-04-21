@@ -80,22 +80,22 @@ export default function Home() {
             <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
               <div>
                 <CategoryCard
-                  imageSrc="/HotelCard.svg"
-                  title="Local Hotel A"
+                  imageSrc="/DallasHotel1.svg"
+                  title="Dallas Omni Hotel"
                   rating={4.2}
                 />
               </div>
               <div>
                 <CategoryCard
-                  imageSrc="/PalmHouse.svg"
-                  title="Local Hotel B"
+                  imageSrc="/DallasHotel2.svg"
+                  title="Thompson Dallas, by Hyatt"
                   rating={4.0}
                 />
               </div>
               <div>
                 <CategoryCard
-                  imageSrc="/BabAlShams.svg"
-                  title="Local Hotel C"
+                  imageSrc="/DallasHotel3.svg"
+                  title="The Madison, Dallas"
                   rating={4.8}
                 />
               </div>
