@@ -1,4 +1,5 @@
 import Navbar from "@/app/components/Navbar";
+import Link from "next/link";
 import clsx from "clsx";
 
 function CategoryCard({imageSrc, title, description, rating})
@@ -49,6 +50,7 @@ export default function Home() {
           <div className="w-full px-5 py-5">
             <h2 className="text-3xl font-bold text-left mb-4">Top Rated Hotels</h2>
             <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
+              <Link href="/Categories/review">
               <div>
                 <CategoryCard
                   imageSrc="/HotelCard.svg"
@@ -56,6 +58,7 @@ export default function Home() {
                   rating={5}
                 />
               </div>
+              </Link>
               <div>
                 <CategoryCard
                   imageSrc="/PalmHouse.svg"
