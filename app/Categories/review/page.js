@@ -69,7 +69,7 @@ export default function ReviewPage() {
         {/* LEFT - REVIEWS */}
         <div className="md:col-span-2 flex flex-col gap-4">
 
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-650">
             Recent Reviews
           </h2>
 
