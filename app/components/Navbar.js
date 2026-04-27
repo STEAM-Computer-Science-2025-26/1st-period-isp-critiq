@@ -48,7 +48,7 @@ export default function Navbar() {
         />
 
       {/* Page Name */}
-      <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2">
+      <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-lg border border-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.37)">
         {getPageName()}
       </div>
 
