@@ -1,100 +1,66 @@
 const crypto = require("crypto");
-function review(req, res, supabase, sendJSON) {
-    // This is the port number for the reviews server.
 
-    // This array stores all reviews for now.
-    // It works for testing, but it resets every time the server restarts.
-    const reviews = [];
+async function reviews(req, res, supabase, sendJSON, readBody) {
 
-    // This helper function sends JSON data back to the frontend.
-    function sendJSON(res, code, data) {
-    res.writeHead(code, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(data));
+  // 🔹 GET REVIEWS
+  if (req.method === "GET") {
+    const { data, error } = await supabase
+      .from("Reviews")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return sendJSON(res, 500, { error: "Failed to fetch reviews" });
     }
 
-    // This helper function reads the data sent in a POST request.
-    function readBody(req) {
-    return new Promise((resolve) => {
-        let data = "";
-        req.on("data", (chunk) => (data += chunk));
-        req.on("end", () => resolve(data));
-    });
+    return sendJSON(res, 200, data);
+  }
+
+  // 🔹 CREATE REVIEW
+  if (req.method === "POST") {
+    const raw = await readBody(req);
+
+    let body;
+    try {
+      body = JSON.parse(raw);
+    } catch {
+      return sendJSON(res, 400, { error: "Invalid JSON" });
     }
 
-    // This creates the backend server.
-    const server = http.createServer(async (req, res) => {
-    // These lines allow the frontend to connect to this backend.
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    const { title, content, rating, category } = body;
 
-    // This handles browser permission checks before the real request happens.
-    if (req.method === "OPTIONS") {
-        res.writeHead(204);
-        return res.end();
+    // ✅ FIXED VALIDATION
+    if (!title || !content || rating === 0) {
+      return sendJSON(res, 400, { error: "Missing fields" });
     }
 
-    // This reads the URL and gets the path being requested.
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const path = url.pathname;
+    const { data, error } = await supabase
+      .from("Reviews") // make sure EXACT table name
+      .insert([
+        {
+          title,
+          content,
+          rating,
+          category: category || "general",
+          created_at: new Date().toISOString(),
+        },
+      ])
+      .select()
+      .single();
 
-    // This is a simple test route to make sure the server is working.
-    if (path === "/health" && req.method === "GET") {
-        return sendJSON(res, 200, { status: "ok" });
+    if (error) {
+      return sendJSON(res, 500, { error: error.message }); // 🔥 IMPORTANT
     }
 
-    // This route sends back all reviews currently stored in the array.
-    if (path === "/reviews" && req.method === "GET") {
-        return sendJSON(res, 200, { reviews });
-    }
+    return sendJSON(res, 201, data);
+  }
 
-    // This route adds a new review.
-    if (path === "/reviews" && req.method === "POST") {
-        // Read the data sent from the frontend.
-        const raw = await readBody(req);
+  if (error) {
+    return sendJSON(res, 500, { error: error.message });
+  }
 
-        let body = {};
-
-        // Try to turn the incoming text into JSON.
-        // If the format is wrong, send an error.
-        try {
-        body = JSON.parse(raw || "{}");
-        } catch {
-        return sendJSON(res, 400, { error: "Invalid JSON" });
-        }
-
-        // Take the needed fields from the request body.
-        const { placeName, rating, text } = body;
-
-        // Make sure all required fields were included.
-        if (!placeName || !rating || !text) {
-        return sendJSON(res, 400, { error: "placeName, rating, text required" });
-        }
-
-        // Create a new review object.
-        const review = {
-        id: crypto.randomUUID(),
-        placeName,
-        rating,
-        text,
-        createdAt: new Date().toISOString(),
-        };
-
-        // Add the new review into the reviews array.
-        reviews.push(review);
-
-        // Send the newly created review back as confirmation.
-        return sendJSON(res, 201, { review });
-    }
-
-    // If the route does not match anything above, send a 404 error.
-    return sendJSON(res, 404, { error: "Not found", path });
-    });
-
-    // This starts the server and shows a message in the terminal.
-    server.listen(PORT, () => {
-    console.log(`Reviews backend running on port ${PORT}`);
-    });
+  return sendJSON(res, 405, { error: "Method not allowed" });
 }
 
-module.exports = review;
+module.exports = reviews;
