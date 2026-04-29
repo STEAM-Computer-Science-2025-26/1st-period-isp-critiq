@@ -39,14 +39,15 @@ export default function Navbar() {
   return (
     <div className="w-full flex justify-between items-center px-6 py-4 bg-black text-white">
       {/* LEFT */}
-      <img
+      <Link href="/">
+        <img
           src="/Critiq.svg"
           alt="critiq.js logo"
           width={100}
           height={30}
           className="bg-white p-3 rounded-lg px-2"
         />
-
+      </Link>
       {/* Page Name */}
       <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-lg border border-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.37)">
         {getPageName()}

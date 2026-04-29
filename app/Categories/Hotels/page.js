@@ -111,66 +111,68 @@ export default function Home() {
             <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
               <div>
                 <CategoryCard
-                  imageSrc="/HotelCard.svg"
-                  title="Luxury Resort X"
+                  imageSrc="/SantaMonicaHotel.svg"
+                  title="Santa Monica Hotel"
                   rating={5}
                 />
               </div>
               <div>
                 <CategoryCard
-                  imageSrc="/PalmHouse.svg"
-                  title="Boutique Hotel Y"
+                  imageSrc="/LaQuintaNashville.svg"
+                  title="La Quinta Nashville"
+                  rating={5}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/Trastevere.svg"
+                  title="Suites Trastevere"
                   rating={4.9}
                 />
               </div>
               <div>
                 <CategoryCard
-                  imageSrc="/BabAlShams.svg"
-                  title="Historic Inn Z"
+                  imageSrc="/JapanPodHotel.svg"
+                  title="Tokyo Pod Hotel"
                   rating={4.7}
                 />
               </div>
             </div>
           </div>
 
-          {/*First Row*/}
-          <div className="flex flex-wrap items-stretch justify-left gap-4 my-5 mx-5 px-4 overflow-visible h-auto">
-            
-            {/*Card 2*/}
-            <div>
-              <CategoryCard
-                imageSrc="/PalmHouse.svg"
-                title="Palm House, Palm Beach"
-                rating={4.5}
-              />
-            </div>
-
-            {/*Card 3*/}
-            <div>
-              <CategoryCard
-                imageSrc="/BabAlShams.svg"
-                title="Bab Al Shams, Dubai"
-                rating={5}
-              />
-            </div>
-
-            {/*Card 4*/}
-            <div>
-              <CategoryCard
-                imageSrc="/HotelCard.svg"
-                title="Hotels"
-                rating={3}
-              />
-            </div>
-
-            {/*Card 5*/}
-            <div>
-              <CategoryCard
-                imageSrc="/HotelCard.svg"
-                title="Hotels"
-                rating={4.2}
+          {/* Top Rated Hotels */}
+          <div className="w-full px-5 py-5">
+            <h2 className="text-3xl font-bold text-left mb-4">Luxury Hotels</h2>
+            <div className="flex flex-wrap items-stretch justify-left gap-4 overflow-visible h-auto">
+              <div>
+                <CategoryCard
+                  imageSrc="/Mandai.svg"
+                  title="Mandai Rainforest Hotel"
+                  rating={5}
                 />
-            </div>    
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/WaldorfAstoria.svg"
+                  title="Waldorf Astoria NYC"
+                  rating={5}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/Trastevere.svg"
+                  title="Suites Trastevere"
+                  rating={4.9}
+                />
+              </div>
+              <div>
+                <CategoryCard
+                  imageSrc="/JapanPodHotel.svg"
+                  title="Tokyo Pod Hotel"
+                  rating={4.7}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </main>
