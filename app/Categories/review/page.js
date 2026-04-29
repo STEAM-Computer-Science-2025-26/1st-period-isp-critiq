@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 
 export default function ReviewPage() {
   const [reviews, setReviews] = useState([]);
