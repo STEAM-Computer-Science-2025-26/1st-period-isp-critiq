@@ -3,23 +3,25 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect} from "react";
+import { useSearchParams } from "next/navigation";
+import Navbar from "@/app/components/Navbar";
 
 export default function ReviewPage() {
   const [reviews, setReviews] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState(0);
+  const searchParams = useSearchParams();
+  const businessName = searchParams.get("name");
 
   // 🔥 FETCH REVIEWS
   useEffect(() => {
-    fetch("https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/reviews")
+    if (!businessName) return;
+
+    fetch(`https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/reviews?company=${encodeURIComponent(businessName)}`)
       .then(res => res.json())
-      .then(data => {
-        console.log("GET REVIEWS:", data);
-        setReviews(Array.isArray(data) ? data : []);
-      })
-      .catch(err => console.error("FETCH ERROR:", err));
-  }, []);
+      .then(data => setReviews(data));
+  }, [businessName]);
 
   // 🔥 SUBMIT REVIEW
   async function submitReview() {
@@ -35,7 +37,8 @@ export default function ReviewPage() {
           title,
           content,
           rating,
-          category: "general",
+          company: businessName,
+          category: "hotel",    //need to fix so any category can work with this page, not just hotels
         }),
       });
 
@@ -50,42 +53,80 @@ export default function ReviewPage() {
         setContent("");
         setRating(0);
       } else {
-        console.error("POST FAILED:", data);
+        console.log("POST ERROR", data);
       }
 
     } catch (err) {
       console.error("SUBMIT ERROR:", err);
     }
   }
+    //avg rating: 
+  const avgRating =
+    reviews.length > 0
+      ? (
+          reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+        ).toFixed(1)
+      : 0;
+  //data
+  const businessData = {
+    "Dallas Omni Hotel": {
+      image: "/DallasHotel1.svg",
+      category: "Hotel",
+    },
+    "Bab Al Shams, Dubai": {
+      image: "/BabAlShams.svg",
+      category: "Hotel",
+    },
+    "Palm House, Palm Beach": {
+      image: "/PalmHouse.svg",
+      category: "Hotel",
+    },
+    // add more as needed
+  };
 
+  // fallback
+  const currentBusiness = businessData[businessName] || {
+    image: "",
+    category: "Unknown",
+  };
   return (
     <div className="max-w-6xl mx-auto mt-8 px-4">
-
+      <Navbar />
       {/* 🔥 BUSINESS HEADER */}
       <div className="bg-gray-100 rounded-xl p-6 mb-6 shadow-sm">
         <div className="flex flex-col md:flex-row gap-6 items-center">
-
-          {/* IMAGE PLACEHOLDER */}
-          <div className="w-40 h-40 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500">
-            Image
-          </div>
+            {/* IMAGE PLACEHOLDER */}
+          {currentBusiness?.image ? (
+            <img
+              src={currentBusiness.image}
+              className="w-40 h-40 object-contain rounded-lg"
+            />
+          ) : (
+            // if image no work
+            <img
+              src={currentBusiness.null}
+              className="w-40 h-40 object-contain rounded-lg"
+            />
+          )}
 
           {/* BUSINESS INFO */}
           <div className="flex flex-col gap-2 text-center md:text-left">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Business Name
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              {businessName}
             </h1>
 
             {/* AVG RATING */}
             <div className="flex items-center gap-2 justify-center md:justify-start">
-              <span className="text-red-500 text-xl">★★★★☆</span>
-              <span className="text-gray-600 text-sm">
-                4.2 average rating
+              <span className="text-red-500 text-xl">
+                {"★".repeat(Math.round(avgRating))}
+              </span>
+              <span className="text-gray-600 dark:text-gray-300 text-sm">
+                {avgRating} average rating
               </span>
             </div>
 
             <p className="text-gray-500 text-sm">
-              Category • Location placeholder
+            {currentBusiness.category}
             </p>
           </div>
         </div>
@@ -145,7 +186,7 @@ export default function ReviewPage() {
                 onClick={() => setRating(star)}
                 className={`text-2xl transition-transform ${
                   star <= rating ? "text-red-500 scale-110" : "text-gray-400"
-                } hover:scale-125`}
+                } hover:scale-125 hover:text-red-500`}
               >
                 {star <= rating ? "★" : "☆"}
               </button>
@@ -166,12 +207,12 @@ export default function ReviewPage() {
 
           <button
             onClick={submitReview}
-            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded transition"
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded transition transform hover:scale-105"
           >
             Submit Review
           </button>
+          
         </div>
-
       </div>
     </div>
   );
