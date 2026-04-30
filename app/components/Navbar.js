@@ -45,19 +45,20 @@ export default function Navbar() {
           alt="critiq.js logo"
           width={100}
           height={30}
-          className="bg-white p-3 rounded-lg px-2"
+          className="bg-white p-3 hover:scale-105 rounded-lg px-2"
         />
       </Link>
-      {/* Page Name */}
-      <div className="text-xl font-bold text-white border-1 border-white rounded-xl px-3 py-2 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-lg border border-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.37)">
-        {getPageName()}
-      </div>
-
+        {/* Page Name */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-white px-3 py-2 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-lg border border-white/90 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+          {getPageName()}
+        </div>
       {/* RIGHT */}
       <div className="flex gap-8 items-center font-bold relative">
-        <Link href="/Categories">Dashboard</Link>
+        <Link href="/Categories" className="px-0 py-2 hover:scale-115 hover:text-red-500 text-white rounded">
+        Dashboard
+        </Link>
         
-        <Link href="/profile" className="px-4 py-2 text-white rounded">
+        <Link href="/profile" className="px-3 py-2 hover:scale-115 hover:text-red-500 text-white rounded">
           Profile
         </Link>
 
@@ -66,7 +67,7 @@ export default function Navbar() {
                 onClick={() => {
                 setShowSettingsPopup(!showSettingsPopup);
               }}
-              className="px-0 py-2 text-white rounded"
+              className="px-0 py-2 hover:scale-115 hover:text-red-500 text-white rounded"
             >
               Settings
             </button>
@@ -145,7 +146,7 @@ export default function Navbar() {
           </div>
           <button
             onClick={handleLogout}
-            className="bg-red-500 px-4 py-2 rounded"
+            className="bg-red-500 px-4 hover:scale-115 hover:text-zinc-950 py-2 rounded"
         >
           Logout
         </button>

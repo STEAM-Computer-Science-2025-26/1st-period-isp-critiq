@@ -115,15 +115,15 @@ export default function Home() {
             </Link>
           </p>
         </div>
-        <div className="flex flex-col gap-4 font-medium sm:flex-row justify-center pt-10">
+        <div className="flex flex-col scale:105 gap-4 font-medium sm:flex-row justify-center pt-10">
           <Link
-            className="flex h-12 w-full items-center justify-center rounded-full bg-black text-white px-5 transition-colors hover:bg-black/[.80] md:w-[158px]"
+            className="flex h-12 w-full items-center hover:scale-105 justify-center rounded-full bg-black text-white px-5 transition-colors hover:bg-black/[.80] md:w-[158px]"
             href="/signup"
           >
             Sign Up
           </Link>
           <Link
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px]"
+            className="flex h-12 w-full items-center hover:scale-105 justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px]"
             href="/login"
           >
             Log In
