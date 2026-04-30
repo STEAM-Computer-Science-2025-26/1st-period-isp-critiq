@@ -74,7 +74,7 @@ export default function Navbar() {
 
             {showSettingsPopup && (
               <div 
-                className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-30 z-50 backdrop-blur-sm"
+                className="fixed inset-0 flex items-center justify-center bg-red-200 bg-opacity-30 z-50 backdrop-blur-sm"
                 onClick={() => setShowSettingsPopup(false)}
               >
                 <div 

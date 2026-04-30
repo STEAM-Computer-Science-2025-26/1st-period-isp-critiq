@@ -93,7 +93,7 @@ export default function ReviewPage() {
     <div className="max-w-6xl mx-auto mt-8 px-4">
       <Navbar />
       {/* 🔥 BUSINESS HEADER */}
-      <div className="bg-gray-100 rounded-xl p-6 mb-6 shadow-sm">
+      <div className="bg-zinc-100 p-6 mb-6 shadow-sm">
         <div className="flex flex-col md:flex-row gap-6 items-center">
             {/* IMAGE PLACEHOLDER */}
           {currentBusiness?.image ? (
@@ -111,7 +111,7 @@ export default function ReviewPage() {
 
           {/* BUSINESS INFO */}
           <div className="flex flex-col gap-2 text-center md:text-left">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-bold text-zinc-950">
               {businessName}
             </h1>
 
@@ -120,7 +120,7 @@ export default function ReviewPage() {
               <span className="text-red-500 text-xl">
                 {"★".repeat(Math.round(avgRating))}
               </span>
-              <span className="text-gray-600 dark:text-gray-300 text-sm">
+              <span className="text-zinc-600 text-sm">
                 {avgRating} average rating
               </span>
             </div>
