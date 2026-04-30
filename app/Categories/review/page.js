@@ -93,7 +93,7 @@ export default function ReviewPage() {
     <div className="max-w-6xl mx-auto mt-8 px-4">
       <Navbar />
       {/* 🔥 BUSINESS HEADER */}
-      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-6 shadow-sm">
+      <div className="bg-gray-100 rounded-xl p-6 mb-6 shadow-sm">
         <div className="flex flex-col md:flex-row gap-6 items-center">
             {/* IMAGE PLACEHOLDER */}
           {currentBusiness?.image ? (
@@ -138,7 +138,7 @@ export default function ReviewPage() {
         {/* LEFT - REVIEWS */}
         <div className="md:col-span-2 flex flex-col gap-4">
 
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-650">
+          <h2 className="text-xl font-semibold text-gray-800">
             Recent Reviews
           </h2>
 
@@ -148,10 +148,10 @@ export default function ReviewPage() {
             reviews.map((r) => (
               <div
                 key={r.id}
-                className="bg-gray-100 dark:bg-gray-800 p-5 rounded-xl shadow-sm hover:shadow-md transition"
+                className="bg-gray-100 p-5 rounded-xl shadow-sm hover:shadow-md transition"
               >
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                  <h3 className="font-semibold text-gray-900">
                     {r.title}
                   </h3>
                   <span className="text-red-500 font-bold">
@@ -159,7 +159,7 @@ export default function ReviewPage() {
                   </span>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                <p className="text-gray-600 text-sm">
                   {r.content}
                 </p>
 
@@ -172,9 +172,9 @@ export default function ReviewPage() {
         </div>
 
         {/* RIGHT - FORM */}
-        <div className="bg-gray-200 dark:bg-gray-700 p-6 rounded-xl shadow-md h-fit sticky top-6">
+        <div className="bg-gray-200 p-6 rounded-xl shadow-md h-fit sticky top-6">
 
-          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-lg font-semibold mb-4 text-gray-900">
             Write a Review
           </h2>
 
@@ -195,13 +195,13 @@ export default function ReviewPage() {
 
           <input
             placeholder="Review title"
-            className="w-full mb-3 p-2 rounded bg-white dark:bg-gray-800"
+            className="w-full mb-3 p-2 rounded bg-white"
             onChange={(e)=>setTitle(e.target.value)}
           />
 
           <textarea
             placeholder="Write your review..."
-            className="w-full mb-3 p-2 rounded bg-white dark:bg-gray-800"
+            className="w-full mb-3 p-2 rounded bg-white"
             onChange={(e)=>setContent(e.target.value)}
           />
 
