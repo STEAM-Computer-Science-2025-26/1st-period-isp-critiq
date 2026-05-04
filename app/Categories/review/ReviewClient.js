@@ -1,0 +1,225 @@
+
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import Navbar from "@/app/components/Navbar";
+
+export default function ReviewClient() {
+  const [reviews, setReviews] = useState([]);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [rating, setRating] = useState(0);
+  const searchParams = useSearchParams();
+  const [businessName, setBusinessName] = useState(null);
+
+  useEffect(() => {
+    const name = searchParams.get("name");
+    if (name) setBusinessName(name);
+  }, [searchParams]);
+
+  // 🔥 FETCH REVIEWS
+  useEffect(() => {
+    if (!businessName) return;
+
+    fetch(`https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/reviews?company=${encodeURIComponent(businessName)}`)
+      .then(res => res.json())
+      .then(data => setReviews(data));
+  }, [businessName]);
+
+  // 🔥 SUBMIT REVIEW
+  async function submitReview() {
+    try {
+      console.log("SUBMIT CLICKED");
+
+      const res = await fetch("https://bookish-cod-rq5jpjqvjg524p6-5001.app.github.dev/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          content,
+          rating,
+          company: businessName,
+          category: "hotel",    //need to fix so any category can work with this page, not just hotels
+        }),
+      });
+
+      const data = await res.json();
+
+      console.log("POST RESPONSE:", data);
+
+      if (res.ok) {
+        setReviews(prev => [data, ...prev]);
+
+        setTitle("");
+        setContent("");
+        setRating(0);
+      } else {
+        console.log("POST ERROR", data);
+      }
+
+    } catch (err) {
+      console.error("SUBMIT ERROR:", err);
+    }
+  }
+    //avg rating: 
+  const avgRating =
+    reviews.length > 0
+      ? (
+          reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+        ).toFixed(1)
+      : 0;
+  //data
+  const businessData = {
+    "Dallas Omni Hotel": {
+      image: "/DallasHotel1.svg",
+      category: "Hotel",
+    },
+    "Bab Al Shams, Dubai": {
+      image: "/BabAlShams.svg",
+      category: "Hotel",
+    },
+    "Palm House, Palm Beach": {
+      image: "/PalmHouse.svg",
+      category: "Hotel",
+    },
+    // add more as needed
+  };
+
+  // fallback
+  const currentBusiness = businessData[businessName] || {
+    image: "",
+    category: "Unknown",
+  };
+
+  if (!businessName) return <div>Loading...</div>;
+
+  return (
+  <div>
+    <Navbar />
+  <div className="max-w-6xl mx-auto mt-8 px-4">
+      {/* 🔥 BUSINESS HEADER */}
+      <div className="bg-zinc-100 p-6 mb-6 shadow-sm">
+        <div className="flex flex-col md:flex-row gap-6 items-center">
+            {/* IMAGE PLACEHOLDER */}
+            {currentBusiness?.image ? (
+              <img
+                src={currentBusiness.image}
+                className="w-40 h-40 object-contain rounded-lg"
+              />
+            ) : (
+              <div className="w-40 h-40 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500">
+                No Image
+              </div>
+            )}
+
+          {/* BUSINESS INFO */}
+          <div className="flex flex-col gap-2 text-center md:text-left">
+            <h1 className="text-3xl font-bold text-zinc-950">
+              {businessName}
+            </h1>
+
+            {/* AVG RATING */}
+            <div className="flex items-center gap-2 justify-center md:justify-start">
+              <span className="text-red-500 text-xl">
+                {"★".repeat(Math.round(avgRating))}
+              </span>
+              <span className="text-zinc-600 text-sm">
+                {avgRating} average rating
+              </span>
+            </div>
+
+            <p className="text-gray-500 text-sm">
+            {currentBusiness.category}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* MAIN GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        {/* LEFT - REVIEWS */}
+        <div className="md:col-span-2 flex flex-col gap-4">
+
+          <h2 className="text-xl font-semibold text-gray-800">
+            Recent Reviews
+          </h2>
+
+          {reviews.length === 0 ? (
+            <p className="text-gray-500">No reviews yet.</p>
+          ) : (
+            reviews.map((r) => (
+              <div
+                key={r.id}
+                className="bg-gray-100 p-5 rounded-xl shadow-sm hover:shadow-md transition"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="font-semibold text-gray-900">
+                    {r.title}
+                  </h3>
+                  <span className="text-red-500 font-bold">
+                    {"★".repeat(r.rating)}
+                  </span>
+                </div>
+
+                <p className="text-gray-600 text-sm">
+                  {r.content}
+                </p>
+
+                <p className="text-xs text-gray-400 mt-2">
+                  by {r.username || "Anonymous"}
+                </p>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* RIGHT - FORM */}
+        <div className="bg-gray-200 p-6 rounded-xl shadow-md h-fit sticky top-6">
+
+          <h2 className="text-lg font-semibold mb-4 text-gray-900">
+            Write a Review
+          </h2>
+
+          {/* ⭐ STARS (your animation kept) */}
+          <div className="flex gap-1 mb-4">
+            {[1,2,3,4,5].map(star => (
+              <button
+                key={star}
+                onClick={() => setRating(star)}
+                className={`text-2xl transition-transform ${
+                  star <= rating ? "text-red-500 scale-110" : "text-gray-400"
+                } hover:scale-125 hover:text-red-500`}
+              >
+                {star <= rating ? "★" : "☆"}
+              </button>
+            ))}
+          </div>
+
+          <input
+            placeholder="Review title"
+            className="w-full mb-3 p-2 rounded bg-white"
+            onChange={(e)=>setTitle(e.target.value)}
+          />
+
+          <textarea
+            placeholder="Write your review..."
+            className="w-full mb-3 p-2 rounded bg-white"
+            onChange={(e)=>setContent(e.target.value)}
+          />
+
+          <button
+            onClick={submitReview}
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded transition transform hover:scale-105"
+          >
+            Submit Review
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
